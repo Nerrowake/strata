@@ -74,6 +74,7 @@ It should help:
 - [Telemetry Scope](docs/telemetry-scope.md)
 - [Privacy and Security](docs/privacy-security.md)
 - [Architecture Principles](docs/architecture-principles.md)
+- [Compatibility](docs/compatibility.md)
 - [Definition of Done](docs/definition-of-done.md)
 
 ## Development
