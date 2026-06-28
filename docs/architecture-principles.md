@@ -90,6 +90,9 @@ Laravel listeners collect raw data.
 
 Strata should publish a single readable configuration file.
 
+The first configuration surface and safe defaults are documented in
+[Configuration Surface and Defaults](configuration.md).
+
 Initial configuration areas:
 
 - global enable or disable flag
@@ -211,6 +214,9 @@ include:
 
 The dashboard should be private, focused, and separate from capture behavior.
 
+The first dashboard information architecture is documented in
+[Information Architecture](information-architecture.md).
+
 The dashboard should provide:
 
 - timeline-first event browsing
@@ -236,6 +242,9 @@ and documented.
 ## Dashboard Access
 
 Dashboard access is security-sensitive and should be explicit.
+
+The first dashboard authentication model is documented in
+[Dashboard Authentication Model](dashboard-authentication.md).
 
 Initial rules:
 

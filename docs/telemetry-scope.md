@@ -22,6 +22,9 @@ The default capture model is:
 
 ## Planned Event Types
 
+The initial normalized event schema is documented in
+[Telemetry Event Schema v0](event-schema.md).
+
 - request started
 - request completed
 - exception captured

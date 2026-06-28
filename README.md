@@ -71,13 +71,22 @@ It should help:
 - [Security](SECURITY.md)
 - [Support](SUPPORT.md)
 - [Product Brief](docs/product-brief.md)
+- [Personas and Staging Workflows](docs/personas-workflows.md)
+- [Product Requirements](docs/product-requirements.md)
 - [Telemetry Scope](docs/telemetry-scope.md)
+- [Telemetry Event Schema](docs/event-schema.md)
 - [Privacy and Security](docs/privacy-security.md)
 - [Architecture Principles](docs/architecture-principles.md)
+- [Information Architecture](docs/information-architecture.md)
+- [Dashboard Authentication](docs/dashboard-authentication.md)
+- [Configuration Surface and Defaults](docs/configuration.md)
 - [Compatibility](docs/compatibility.md)
 - [Storage and Retention](docs/storage-retention.md)
+- [Package Naming and Distribution](docs/package-distribution.md)
+- [Local Development](docs/local-development.md)
 - [Testing Strategy](docs/testing-strategy.md)
 - [Definition of Done](docs/definition-of-done.md)
+- [Decision Log](docs/decisions)
 
 ## Development
 

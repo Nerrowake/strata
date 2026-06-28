@@ -31,6 +31,9 @@ Strata should make staging behavior visible as it happens.
 
 ## Audience
 
+The first personas and staging workflows are documented in
+[Personas and Staging Workflows](personas-workflows.md).
+
 ### Primary Users
 
 - Laravel developers who need fast context when a staging issue appears.
@@ -75,6 +78,9 @@ These workflows assume authenticated staging access and a team-controlled
 environment. Strata should not assume public production traffic.
 
 ## First Release Definition of Useful
+
+Buildable requirements for the first release are documented in
+[Product Requirements](product-requirements.md).
 
 Strata is useful for its first release when a Laravel team can install it in a
 staging application, open a dashboard, perform a review workflow, and understand

@@ -7,6 +7,9 @@ cleanup behavior, and privacy controls for staging telemetry.
 
 The first Strata storage driver should be `database`.
 
+The related configuration shape is documented in
+[Configuration Surface and Defaults](configuration.md).
+
 Strata is a Laravel package, so it should store telemetry through Laravel's
 database abstractions instead of forcing a specific database engine.
 
