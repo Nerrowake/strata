@@ -37,6 +37,6 @@ Before telemetry capture ships, the project must define:
 
 ## Scope
 
-This repository currently contains planning and documentation only. Security
-reports about future behavior should be tied to documented plans or published
-code once implementation begins.
+This repository currently contains planning documentation, a Laravel package
+skeleton, prototype dashboard code, and early telemetry capture experiments.
+Security reports should be tied to documented plans or published code.

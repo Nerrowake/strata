@@ -17,10 +17,9 @@
 
 ## Status
 
-Strata is in foundation planning. Application code has not been written yet.
-
-This repository is being prepared first so the project starts with clear
-standards, documentation, security expectations, and product direction.
+Strata is in early package development. The repository includes foundation
+documentation, a Laravel package skeleton, a prototype dashboard shell, and
+early telemetry capture experiments.
 
 ## What Strata Will Do
 
@@ -90,8 +89,7 @@ It should help:
 
 ## Development
 
-Strata is now in the package skeleton stage. Telemetry capture has not been
-implemented yet.
+Strata is now in the package skeleton and prototype telemetry stage.
 
 Local development will use the package test harness:
 
@@ -115,12 +113,13 @@ The package currently provides:
 - isolated dashboard route and view placeholders
 - Testbench-based package smoke tests
 
-Telemetry capture, storage migrations, dashboard functionality, and release
-automation are still future work.
+Persistent storage migrations, production-ready dashboard workflows, broader
+telemetry capture, and release automation are still future work.
 
 ## License
 
 Copyright (c) 2026 Nerrowake.
 
-All rights reserved. Product licensing should be finalized before application
-code is published.
+Strata core is open-source software licensed under the
+[Apache License 2.0](LICENSE.md). Future commercial or hosted features may be
+licensed separately.

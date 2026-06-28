@@ -68,7 +68,7 @@ request bodies, cookies, tokens, raw bindings, or job payloads.
 
 ### 1.0
 
-- Finalize licensing and support policy.
+- Finalize commercial add-on licensing and support policy.
 - Publish stable installation and upgrade documentation.
 - Verify clean package install in a Laravel 13 app.
 - Complete release-blocking test, security, and documentation reviews.

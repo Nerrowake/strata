@@ -1,6 +1,6 @@
 # Support
 
-Strata is not available for production or staging use yet.
+Strata is not ready for production or staging use yet.
 
 ## Current Support Scope
 
@@ -14,7 +14,7 @@ Use issues for:
 
 ## Not Yet Supported
 
-Because application code has not been written, Strata does not yet support:
+Because Strata is still an early package prototype, it does not yet support:
 
 - installation
 - Laravel integration

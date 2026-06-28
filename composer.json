@@ -2,7 +2,7 @@
     "name": "nerrowake/strata",
     "description": "Real-time staging telemetry for Laravel teams.",
     "type": "library",
-    "license": "proprietary",
+    "license": "Apache-2.0",
     "autoload": {
         "psr-4": {
             "Nerrowake\\Strata\\": "src/"
