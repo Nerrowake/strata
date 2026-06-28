@@ -1,0 +1,52 @@
+# Contributing to Strata
+
+Strata is currently in foundation planning. No application code has been written
+yet.
+
+## Current Contribution Focus
+
+Useful contributions at this stage:
+
+- product scope clarification
+- telemetry requirements
+- privacy and redaction concerns
+- documentation improvements
+- issue triage
+- Laravel package architecture notes
+
+## Engineering Values
+
+- Clarity over cleverness
+- Maintainability over novelty
+- Correctness before performance
+- Documentation as part of the product
+- Thoughtful design
+- Practical engineering
+- Long-term ownership
+
+## Definition of Done
+
+A feature is not complete until:
+
+- it works as intended
+- it has appropriate tests
+- it has documentation
+- it handles errors gracefully
+- it follows project conventions
+- it has been reviewed
+- README or docs are updated if behavior changed
+- changelog is updated if needed
+- UI changes include screenshots or visual notes
+- security and privacy implications are considered
+
+## Before App Code Begins
+
+Before implementation starts, the project should define:
+
+- package structure
+- supported Laravel and PHP versions
+- local development workflow
+- test strategy
+- redaction policy
+- data retention assumptions
+- dashboard architecture

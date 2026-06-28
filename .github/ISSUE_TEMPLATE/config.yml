@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security reports
+    url: https://github.com/Nerrowake/strata/security/policy
+    about: Report vulnerabilities privately instead of opening a public issue.
+  - name: Nerrowake playbook
+    url: https://github.com/Nerrowake/playbook
+    about: Review Nerrowake engineering and repository standards.
