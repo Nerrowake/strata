@@ -11,8 +11,10 @@ All notable changes to Strata will be documented in this file.
 - Initial Laravel package skeleton with Composer metadata, service provider,
   publishable configuration, dashboard route/view placeholders, and package
   smoke tests.
+- Prototype dashboard shell with timeline scanning, filters, empty state, and
+  redacted event detail placeholders.
 
 ### Changed
 
-- Strata has package bootstrapping in place, but telemetry capture and dashboard
-  functionality are not implemented yet.
+- Strata has package bootstrapping and a dashboard prototype in place, but
+  telemetry capture and storage are not implemented yet.
