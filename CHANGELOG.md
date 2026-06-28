@@ -15,6 +15,9 @@ All notable changes to Strata will be documented in this file.
   redacted event detail placeholders.
 - Prototype query telemetry capture with SQL shape redaction, slow query
   indicators, and cautious repeated-query N+1 signals.
+- Foundation documentation for personas, product requirements, information
+  architecture, local development, package distribution, dashboard
+  authentication, event schema, configuration defaults, and decision logs.
 
 ### Changed
 

@@ -129,9 +129,15 @@ Telemetry should be treated as temporary staging review data.
 The initial storage and retention decision is documented in
 [Storage and Retention](storage-retention.md).
 
-## Open Decisions
+## Foundation Decisions and Follow-Ups
 
-- Authentication model for the dashboard
+Documented foundation decisions:
+
+- Authentication model for the dashboard is documented in
+  [Dashboard Authentication Model](dashboard-authentication.md)
+
+Remaining follow-up decisions:
+
 - Safe user identity representation
 - Team-sharing model for issue links
 - Whether production usage is unsupported, discouraged, or separately licensed

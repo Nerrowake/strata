@@ -50,3 +50,6 @@ Before implementation starts, the project should define:
 - redaction policy
 - data retention assumptions
 - dashboard architecture
+
+The current foundation decisions are linked from the repository README and the
+decision-log convention is documented in `docs/decisions/`.

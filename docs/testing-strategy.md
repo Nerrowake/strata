@@ -8,6 +8,9 @@ readiness checks.
 
 Strata should earn trust before it earns features.
 
+The local development and example app strategy is documented in
+[Local Development and Example App Strategy](local-development.md).
+
 The test suite should prove that Strata:
 
 - captures useful Laravel staging telemetry
