@@ -2,17 +2,13 @@
 
 There is no Strata application code yet, so there is no executable test suite.
 
-Before the first usable release, the repository should include automated tests
-for:
+The required test layers and coverage areas are defined in
+[Testing Strategy](../docs/testing-strategy.md).
 
-- request telemetry
-- query telemetry
-- redaction behavior
-- dashboard authorization
-- event storage
-- queue telemetry
-- scheduler telemetry
-- error handling
+When implementation begins, this file should document the actual commands for:
 
-Testing commands should be documented here and in `README.md` once implementation
-begins.
+- unit tests
+- package integration tests
+- feature tests
+- database compatibility checks
+- release smoke checks

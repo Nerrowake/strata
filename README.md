@@ -76,6 +76,7 @@ It should help:
 - [Architecture Principles](docs/architecture-principles.md)
 - [Compatibility](docs/compatibility.md)
 - [Storage and Retention](docs/storage-retention.md)
+- [Testing Strategy](docs/testing-strategy.md)
 - [Definition of Done](docs/definition-of-done.md)
 
 ## Development
