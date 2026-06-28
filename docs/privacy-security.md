@@ -126,10 +126,11 @@ Telemetry should be treated as temporary staging review data.
 - Exported or shared issue context should preserve redaction.
 - Teams should be able to clear captured telemetry from a staging environment.
 
+The initial storage and retention decision is documented in
+[Storage and Retention](storage-retention.md).
+
 ## Open Decisions
 
-- Default retention window
-- Storage driver options
 - Authentication model for the dashboard
 - Safe user identity representation
 - Team-sharing model for issue links

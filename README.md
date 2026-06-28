@@ -75,6 +75,7 @@ It should help:
 - [Privacy and Security](docs/privacy-security.md)
 - [Architecture Principles](docs/architecture-principles.md)
 - [Compatibility](docs/compatibility.md)
+- [Storage and Retention](docs/storage-retention.md)
 - [Definition of Done](docs/definition-of-done.md)
 
 ## Development

@@ -194,8 +194,9 @@ The storage design should:
 - support bounded dashboard reads
 
 Database tables should be designed around append-heavy telemetry and dashboard
-reads. Exact table names and columns should be decided with the storage issue,
-but the first model should likely include:
+reads. The storage and retention decision is documented in
+[Storage and Retention](storage-retention.md). The first model should likely
+include:
 
 - telemetry event identifier
 - event type
