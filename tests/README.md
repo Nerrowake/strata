@@ -1,14 +1,23 @@
 # Tests
 
-There is no Strata application code yet, so there is no executable test suite.
+Strata has a package smoke test suite for the first Laravel package skeleton.
 
 The required test layers and coverage areas are defined in
 [Testing Strategy](../docs/testing-strategy.md).
 
-When implementation begins, this file should document the actual commands for:
+Current commands:
 
-- unit tests
-- package integration tests
-- feature tests
-- database compatibility checks
-- release smoke checks
+```bash
+composer install
+composer test
+```
+
+Current coverage:
+
+- package service provider registration through Testbench
+- default config merging
+- dashboard route disabled by default
+
+Future tests should add the capture, redaction, storage, queue, scheduler,
+failure handling, compatibility, and release smoke coverage described in the
+testing strategy.

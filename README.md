@@ -81,16 +81,33 @@ It should help:
 
 ## Development
 
-There is no Strata application code yet.
+Strata is now in the package skeleton stage. Telemetry capture has not been
+implemented yet.
 
-When implementation begins, this README should be updated with:
+Local development will use the package test harness:
 
-- installation instructions
-- local development setup
-- package structure
-- environment variables
-- testing commands
-- deployment notes
+```bash
+composer install
+composer test
+```
+
+Prototype installation path once the package is published:
+
+```bash
+composer require nerrowake/strata
+php artisan vendor:publish --tag=strata-config
+```
+
+The package currently provides:
+
+- Laravel package metadata
+- auto-discovered service provider
+- publishable `config/strata.php`
+- isolated dashboard route and view placeholders
+- Testbench-based package smoke tests
+
+Telemetry capture, storage migrations, dashboard functionality, and release
+automation are still future work.
 
 ## License
 

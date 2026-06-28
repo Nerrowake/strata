@@ -1,0 +1,41 @@
+{
+    "name": "nerrowake/strata",
+    "description": "Real-time staging telemetry for Laravel teams.",
+    "type": "library",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Nerrowake\\Strata\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nerrowake\\Strata\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.5",
+        "laravel/framework": "^13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "orchestra/testbench": "^11.0",
+        "phpunit/phpunit": "^12.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nerrowake\\Strata\\StrataServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "format": "pint"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
