@@ -358,7 +358,7 @@
                     </div>
                 </div>
 
-                <div class="status-note">Prototype shell | telemetry capture pending</div>
+                <div class="status-note">Prototype shell | query capture active when enabled</div>
             </div>
         </header>
 
@@ -366,7 +366,7 @@
             <div class="main-column">
                 <section class="summary-grid" aria-label="Dashboard summary">
                     <article class="metric">
-                        <strong>0</strong>
+                        <strong>{{ $storedEvents ?? 0 }}</strong>
                         <p>stored events</p>
                     </article>
                     <article class="metric">
