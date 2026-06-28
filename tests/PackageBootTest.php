@@ -18,5 +18,7 @@ class PackageBootTest extends TestCase
     public function test_dashboard_route_is_disabled_by_default(): void
     {
         $this->assertFalse(Route::has('strata.dashboard'));
+
+        $this->get('/strata')->assertNotFound();
     }
 }

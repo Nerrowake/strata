@@ -17,6 +17,9 @@ Current coverage:
 - package service provider registration through Testbench
 - default config merging
 - dashboard route disabled by default
+- dashboard route registration when enabled
+- prototype dashboard shell rendering for filters, empty state, timeline, and
+  redacted event detail
 
 Future tests should add the capture, redaction, storage, queue, scheduler,
 failure handling, compatibility, and release smoke coverage described in the
