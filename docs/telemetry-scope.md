@@ -68,6 +68,36 @@ how it can be disabled or narrowed.
 | Scheduled tasks | command or task name, lifecycle state, duration, exit status, timestamp | command arguments marked sensitive, environment variables, command output | enable or disable scheduler telemetry; ignore task names |
 | Environment context | configured environment name, app version or deployment identifier when provided | server secrets, full environment variables, infrastructure credentials | choose which identifiers are provided; disable deployment context |
 
+## Query Telemetry Plan
+
+The first query telemetry implementation records Laravel database query events
+as normalized SQL shapes. It stores timing metadata and connection name, but it
+does not store raw bindings.
+
+Initial query fields:
+
+- SQL shape with inline string and numeric literals masked
+- connection name
+- duration in milliseconds
+- slow-query indicator based on `thresholds.slow_query_ms`
+- repeated-query count for the current in-process telemetry window
+- possible N+1 indicator when a SQL shape reaches
+  `thresholds.repeated_query_count`
+- binding redaction marker
+
+The first N+1 approach is intentionally cautious. It does not claim model or
+relationship intent. It only marks repeated SQL shapes as possible N+1 evidence
+once the configured threshold is reached, so the dashboard can point developers
+toward something worth inspecting without overstating certainty.
+
+Redaction safeguards:
+
+- raw bindings are excluded from stored events
+- inline quoted strings and numeric literals are masked in SQL shapes
+- query capture can be disabled with `capture.queries`
+- possible N+1 detection can be disabled with `capture.n_plus_one`
+- slow and repeated-query thresholds are configurable
+
 ## Default Capture
 
 The first implementation should default to the smallest useful staging signal:

@@ -13,6 +13,8 @@ All notable changes to Strata will be documented in this file.
   smoke tests.
 - Prototype dashboard shell with timeline scanning, filters, empty state, and
   redacted event detail placeholders.
+- Prototype query telemetry capture with SQL shape redaction, slow query
+  indicators, and cautious repeated-query N+1 signals.
 
 ### Changed
 

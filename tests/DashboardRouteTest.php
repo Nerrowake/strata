@@ -25,6 +25,7 @@ class DashboardRouteTest extends TestCase
             ->assertSee('Timeline filters')
             ->assertSee('No telemetry has been captured yet')
             ->assertSee('Event detail')
+            ->assertSee('query capture active when enabled')
             ->assertSee('[redacted]');
     }
 }
