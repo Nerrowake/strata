@@ -1,7 +1,7 @@
 # Compatibility
 
 This document defines the initial framework, runtime, and database support
-targets for Strata before package code begins.
+targets for Strata during early package development.
 
 ## Current Decision
 

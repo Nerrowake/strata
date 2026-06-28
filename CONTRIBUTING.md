@@ -1,7 +1,8 @@
 # Contributing to Strata
 
-Strata is currently in foundation planning. No application code has been written
-yet.
+Strata is in early package development. The repository includes foundation
+documentation, a Laravel package skeleton, prototype dashboard code, and early
+telemetry capture experiments.
 
 ## Current Contribution Focus
 
@@ -39,9 +40,9 @@ A feature is not complete until:
 - UI changes include screenshots or visual notes
 - security and privacy implications are considered
 
-## Before App Code Begins
+## Foundation Decisions
 
-Before implementation starts, the project should define:
+The current foundation decisions define:
 
 - package structure
 - supported Laravel and PHP versions

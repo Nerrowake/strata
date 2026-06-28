@@ -1,7 +1,7 @@
 # Package Naming and Distribution
 
 This document records the first package naming, namespace, repository structure,
-distribution, and licensing assumptions for Strata.
+distribution, and open-core licensing assumptions for Strata.
 
 ## Current Decision
 
@@ -18,7 +18,7 @@ Nerrowake\Strata
 ```
 
 These names are already reflected in `composer.json` and should remain the
-default unless licensing or ownership decisions require a change before the
+default unless ownership or distribution decisions require a change before the
 first public release.
 
 ## Repository Structure
@@ -55,40 +55,48 @@ reason requires changing it.
 
 ## Distribution Assumptions
 
-Strata is not ready for production or staging installation until licensing,
-support, security, installation, and release documentation are finalized.
+Strata core is intended to be open-source. The current package is licensed under
+Apache-2.0 so early users and contributors can inspect, run, modify, and
+redistribute the core package under a standard permissive license.
+
+Strata is not ready for production or staging installation until support,
+security, installation, and release documentation are finalized.
 
 Before public Packagist distribution, the project should decide:
 
-- whether the package is public, private, commercial, or source-available
 - whether Packagist should index the repository
 - whether release archives or GitHub releases are required
 - which installation docs are stable enough for users
 - how security advisories and vulnerability reports will be handled
 
-Until then, prototype install examples may use the intended package name, but
-docs should make availability limitations clear.
+Until then, prototype install examples may use the intended package name, and
+docs should make availability and support limitations clear.
 
-## Licensing Impact
+## Open-Core Licensing Model
 
-The repository currently uses a proprietary/all-rights-reserved license notice.
-That means public distribution and reuse rights are not finalized.
+The current `nerrowake/strata` package is the open-source core and is licensed
+under Apache-2.0.
 
-Licensing must be decided before a stable package release. The decision should
-cover:
+Future paid or commercial features should be added through separate packages,
+services, or hosted offerings rather than changing the core package license.
+Possible commercial surfaces include:
 
-- source visibility
-- package redistribution rights
-- commercial use
-- contribution terms
-- support expectations
-- whether documentation and code have the same license
+- team review workflows
+- advanced issue sharing
+- hosted dashboards
+- longer retention or managed storage
+- enterprise authentication integrations
+- external tracker integrations
+- priority support
+
+Commercial licensing should be finalized before those paid features are
+released.
 
 ## Revisit Criteria
 
 Revisit package naming and distribution when:
 
-- product licensing is finalized
+- commercial feature licensing is finalized
 - package ownership changes
 - the package is prepared for Packagist
 - installation docs become release-blocking

@@ -18,6 +18,8 @@ All notable changes to Strata will be documented in this file.
 - Foundation documentation for personas, product requirements, information
   architecture, local development, package distribution, dashboard
   authentication, event schema, configuration defaults, and decision logs.
+- Apache-2.0 licensing for the open-source Strata core and documentation for the
+  open-core commercial feature path.
 
 ### Changed
 
