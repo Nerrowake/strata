@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Nerrowake/.github/main/assets/brand/nerrowake-banner.png" alt="Nerrowake - Build the worlds you wake up in." width="100%">
+  <img src="assets/brand/strata-logo-16x9.png" alt="Strata - real-time staging telemetry for Laravel teams" width="100%">
 </p>
 
 <h1 align="center">Strata</h1>
@@ -64,6 +64,7 @@ It should help:
 
 ## Repository Contents
 
+- [Brand Assets](assets/brand)
 - [Roadmap](ROADMAP.md)
 - [Changelog](CHANGELOG.md)
 - [Contributing](CONTRIBUTING.md)
