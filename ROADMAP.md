@@ -2,22 +2,22 @@
 
 This roadmap describes planned direction. It is not a promise of dates or scope.
 
-## Foundation
+## Foundation - Complete
 
 - Define product scope and non-goals.
 - Define telemetry categories and privacy rules.
 - Define package and dashboard architecture.
 - Set up repository standards, labels, milestones, and project tracking.
 
-## Prototype
+## Prototype - Complete
 
 - Create the Laravel package skeleton.
 - Capture basic request lifecycle events in staging.
-- Stream events to a local dashboard.
+- Render events in a local dashboard.
 - Add safe redaction defaults.
 - Document installation and local development.
 
-## Alpha
+## Alpha - Next
 
 - Add query, job, scheduler, and exception telemetry.
 - Detect common N+1 patterns.
