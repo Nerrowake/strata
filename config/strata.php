@@ -6,12 +6,13 @@ return [
     'dashboard' => [
         'enabled' => env('STRATA_DASHBOARD_ENABLED', false),
         'path' => env('STRATA_DASHBOARD_PATH', 'strata'),
-        'middleware' => ['web'],
+        'middleware' => ['web', 'auth'],
     ],
 
     'storage' => [
-        'driver' => 'database',
+        'driver' => 'memory',
         'connection' => env('STRATA_DB_CONNECTION', null),
+        'max_events' => env('STRATA_MAX_EVENTS', 500),
     ],
 
     'retention' => [

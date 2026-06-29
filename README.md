@@ -91,12 +91,17 @@ It should help:
 
 Strata is now in the package skeleton and prototype telemetry stage.
 
-Local development will use the package test harness:
+Local development uses the package test harness:
 
 ```bash
 composer install
+composer format -- --test
 composer test
 ```
+
+The CI workflow runs those same formatting and test commands on pull requests.
+
+## Prototype Installation
 
 Prototype installation path once the package is published:
 
@@ -105,16 +110,61 @@ composer require nerrowake/strata
 php artisan vendor:publish --tag=strata-config
 ```
 
+For local package development before publication, use a Composer path
+repository from a Laravel application:
+
+```json
+{
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../strata"
+    }
+  ]
+}
+```
+
+Then require the package from the application:
+
+```bash
+composer require nerrowake/strata:@dev
+php artisan vendor:publish --tag=strata-config
+```
+
+Enable the prototype explicitly in `config/strata.php` or environment values:
+
+```env
+STRATA_ENABLED=true
+STRATA_DASHBOARD_ENABLED=true
+STRATA_MAX_EVENTS=500
+```
+
+The dashboard route defaults to `/strata` and uses the configured middleware.
+The published config defaults to `['web', 'auth']`; keep the dashboard private
+in staging and use host application auth rules for access.
+
 The package currently provides:
 
 - Laravel package metadata
 - auto-discovered service provider
 - publishable `config/strata.php`
-- isolated dashboard route and view placeholders
+- isolated dashboard route and prototype timeline/detail shell
 - Testbench-based package smoke tests
+- internal telemetry collector contract with safe failure behavior
+- bounded in-memory prototype event storage
+- prototype request lifecycle capture for method, path, route, status, and
+  duration
+- prototype query capture with SQL shape redaction, slow-query flags, and
+  possible repeated-query evidence
 
-Persistent storage migrations, production-ready dashboard workflows, broader
-telemetry capture, and release automation are still future work.
+Known prototype limitations:
+
+- Storage is in-memory and process-local; events reset when the PHP process
+  restarts.
+- Dashboard filtering is server-rendered and intended for early validation.
+- Query and request capture are implemented first; jobs, scheduled tasks, and
+  exception capture are still future work.
+- Production usage is out of scope until a separate production policy exists.
 
 ## License
 

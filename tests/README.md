@@ -9,6 +9,7 @@ Current commands:
 
 ```bash
 composer install
+composer format -- --test
 composer test
 ```
 
@@ -20,11 +21,17 @@ Current coverage:
 - dashboard route registration when enabled
 - prototype dashboard shell rendering for filters, empty state, timeline, and
   redacted event detail
+- dashboard timeline filtering by method, status, route/path, and search text
+- selected request event detail rendering
+- collector contract binding and safe failure behavior
+- bounded in-memory event storage with newest-first reads
+- request lifecycle capture for successful and failing web requests
+- request metadata storage without query strings, headers, cookies, bodies, or
+  uploaded files
 - query telemetry listener capture through Laravel database events
 - SQL shape storage without raw bindings
 - slow query indicators
 - first repeated-query threshold signal for possible N+1 patterns
 
-Future tests should add the capture, redaction, storage, queue, scheduler,
-failure handling, compatibility, and release smoke coverage described in the
-testing strategy.
+Future tests should add deeper redaction, storage, queue, scheduler,
+compatibility, and release smoke coverage described in the testing strategy.

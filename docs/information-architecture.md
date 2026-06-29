@@ -56,6 +56,16 @@ Filters should narrow the timeline without changing package code:
 The detail view explains a selected event using normalized, redacted fields. It
 should make the privacy boundary visible so teams can trust copied context.
 
+Prototype detail behavior:
+
+- timeline rows link to a selected event detail view
+- missing route names display as `unmatched`
+- omitted request bodies, headers, cookies, and query bindings display the
+  configured redaction marker
+- no matching event shows an empty detail state instead of failing the page
+- the server-rendered prototype treats the full page request as the loading
+  boundary; live polling can add a dedicated loading indicator later
+
 ### Issue Context
 
 Issue context should be a redacted summary of the selected event and nearby

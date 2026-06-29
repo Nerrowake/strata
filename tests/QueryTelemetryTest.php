@@ -4,7 +4,7 @@ namespace Nerrowake\Strata\Tests;
 
 use Illuminate\Support\Facades\DB;
 use Nerrowake\Strata\Redaction\SqlShapeSanitizer;
-use Nerrowake\Strata\Storage\QueryEventStore;
+use Nerrowake\Strata\Storage\TelemetryEventStore;
 
 class QueryTelemetryTest extends TestCase
 {
@@ -28,7 +28,7 @@ class QueryTelemetryTest extends TestCase
     {
         parent::setUp();
 
-        app(QueryEventStore::class)->reset();
+        app(TelemetryEventStore::class)->reset();
     }
 
     public function test_query_listener_records_redacted_sql_shape_without_bindings(): void
@@ -38,7 +38,7 @@ class QueryTelemetryTest extends TestCase
             'secret-token',
         ]);
 
-        $events = app(QueryEventStore::class)->recent();
+        $events = app(TelemetryEventStore::class)->recent();
 
         $this->assertCount(1, $events);
         $this->assertSame('select ? as email, ? as token', $events[0]['sql_shape']);
@@ -54,7 +54,7 @@ class QueryTelemetryTest extends TestCase
         DB::select('select ? as id', [2]);
         DB::select('select ? as id', [3]);
 
-        $events = app(QueryEventStore::class)->recent();
+        $events = app(TelemetryEventStore::class)->recent();
 
         $this->assertTrue($events[0]['possible_n_plus_one']);
         $this->assertSame('possible_n_plus_one', $events[0]['status']);

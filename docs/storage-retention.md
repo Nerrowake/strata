@@ -3,7 +3,30 @@
 This document defines Strata's initial storage assumptions, retention defaults,
 cleanup behavior, and privacy controls for staging telemetry.
 
-## Storage Decision
+## Prototype Storage Decision
+
+The prototype Strata storage driver is `memory`.
+
+This driver is intentionally process-local and temporary. It supports early
+capture and dashboard validation without requiring migrations, but it is not a
+durable storage plan.
+
+Prototype configuration shape:
+
+```php
+'storage' => [
+    'driver' => 'memory',
+    'connection' => env('STRATA_DB_CONNECTION', null),
+    'max_events' => env('STRATA_MAX_EVENTS', 500),
+],
+```
+
+Prototype retention behavior is bounded by count. When more than `max_events`
+events are recorded, the oldest events are discarded. This keeps memory use and
+dashboard reads predictable while the database-backed driver is still future
+work.
+
+## Future Database Storage Decision
 
 The first Strata storage driver should be `database`.
 

@@ -81,6 +81,7 @@
         .brand p,
         .metric p,
         .metric strong,
+        .filter-state,
         .timeline-item p,
         .detail-list dd,
         .empty-state p {
@@ -95,6 +96,7 @@
         .brand p,
         .status-note,
         .metric p,
+        .filter-state,
         .timeline-item p,
         .detail-list dt,
         .empty-state p {
@@ -153,7 +155,8 @@
 
         .filters {
             display: grid;
-            grid-template-columns: 1.2fr repeat(3, minmax(120px, 0.6fr));
+            grid-template-columns: 1.2fr repeat(2, minmax(120px, 0.6fr)) auto;
+            align-items: end;
             gap: 12px;
             padding: 16px;
         }
@@ -167,7 +170,8 @@
         }
 
         input,
-        select {
+        select,
+        .clear-link {
             width: 100%;
             min-height: 42px;
             border: 1px solid var(--line);
@@ -176,6 +180,14 @@
             color: var(--ink);
             font: inherit;
             padding: 8px 10px;
+        }
+
+        .clear-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 800;
         }
 
         .timeline {
@@ -257,6 +269,9 @@
         }
 
         .timeline-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid var(--line);
             border-radius: 6px;
             background: var(--panel-muted);
@@ -265,6 +280,13 @@
             font-size: 0.875rem;
             font-weight: 800;
             padding: 8px 10px;
+            text-decoration: none;
+        }
+
+        .timeline-button.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #ffffff;
         }
 
         .empty-state {
@@ -358,7 +380,7 @@
                     </div>
                 </div>
 
-                <div class="status-note">Prototype shell | query capture active when enabled</div>
+                <div class="status-note">Prototype shell | request and query capture active when enabled</div>
             </div>
         </header>
 
@@ -383,41 +405,40 @@
                     </article>
                 </section>
 
-                <form class="filters" aria-label="Timeline filters">
+                <form class="filters" aria-label="Timeline filters" method="get">
                     <label>
                         Search
-                        <input type="search" name="search" placeholder="Path, route, job, task, request id">
+                        <input type="search" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Path, route, status, request id">
                     </label>
                     <label>
-                        Type
-                        <select name="type">
-                            <option>All events</option>
-                            <option>Requests</option>
-                            <option>Queries</option>
-                            <option>Jobs</option>
-                            <option>Scheduled tasks</option>
-                            <option>Exceptions</option>
+                        Method
+                        <select name="method">
+                            <option value="">Any method</option>
+                            @foreach (['GET', 'POST', 'PUT', 'PATCH', 'DELETE'] as $method)
+                                <option value="{{ $method }}" @selected(($filters['method'] ?? '') === $method)>{{ $method }}</option>
+                            @endforeach
                         </select>
                     </label>
                     <label>
                         Status
                         <select name="status">
-                            <option>Any status</option>
-                            <option>OK</option>
-                            <option>Slow</option>
-                            <option>Failed</option>
-                            <option>Handled</option>
+                            <option value="">Any status</option>
+                            @foreach (['started' => 'Started', '200' => '200', '404' => '404', '500' => '500', 'ok' => 'OK', 'slow' => 'Slow', 'possible_n_plus_one' => 'Possible N+1'] as $value => $label)
+                                <option value="{{ $value }}" @selected(($filters['status'] ?? '') === $value)>{{ $label }}</option>
+                            @endforeach
                         </select>
                     </label>
-                    <label>
-                        Window
-                        <select name="window">
-                            <option>Last hour</option>
-                            <option>Last 6 hours</option>
-                            <option>Last 24 hours</option>
-                        </select>
-                    </label>
+                    <a class="clear-link" href="{{ route('strata.dashboard') }}">Clear filters</a>
                 </form>
+
+                <p class="filter-state">
+                    Showing {{ $matchingEvents ?? 0 }} of {{ $storedEvents ?? 0 }} stored events
+                    @if (($filters['q'] ?? '') !== '' || ($filters['method'] ?? '') !== '' || ($filters['status'] ?? '') !== '')
+                        with active filters
+                    @else
+                        with no active filters
+                    @endif
+                </p>
 
                 <section class="timeline" aria-labelledby="timeline-heading">
                     <div class="section-heading">
@@ -425,29 +446,41 @@
                         <span>Newest first</span>
                     </div>
 
-                    <ol class="timeline-list">
-                        @foreach ($events as $event)
-                            <li class="timeline-item">
-                                <time>{{ $event['time'] }}</time>
-                                <div>
-                                    <div class="event-title">
-                                        {{ $event['type'] }}
-                                        <span class="badge {{ $event['severity'] === 'warning' ? 'warning' : ($event['severity'] === 'danger' ? 'danger' : '') }}">
-                                            {{ $event['status'] }}
-                                        </span>
+                    @if ($timelineError)
+                        <section class="empty-state" aria-labelledby="timeline-error-heading">
+                            <h2 id="timeline-error-heading">Timeline unavailable</h2>
+                            <p>{{ $timelineError }}</p>
+                        </section>
+                    @elseif ($events === [])
+                        <section class="empty-state" aria-labelledby="empty-heading">
+                            <h2 id="empty-heading">No telemetry has been captured yet</h2>
+                            <p>When capture and storage are connected, this space will show the first safe, redacted staging events that match the active filters.</p>
+                        </section>
+                    @else
+                        <ol class="timeline-list">
+                            @foreach ($events as $event)
+                                <li class="timeline-item">
+                                    <time>{{ $event['time'] }}</time>
+                                    <div>
+                                        <div class="event-title">
+                                            {{ $event['type'] }}
+                                            <span class="badge {{ $event['severity'] === 'warning' ? 'warning' : ($event['severity'] === 'danger' ? 'danger' : '') }}">
+                                                {{ $event['status'] }}
+                                            </span>
+                                        </div>
+                                        <p>{{ $event['summary'] }}</p>
+                                        <p>{{ $event['meta'] }}</p>
                                     </div>
-                                    <p>{{ $event['summary'] }}</p>
-                                    <p>{{ $event['meta'] }}</p>
-                                </div>
-                                <button class="timeline-button" type="button">Details</button>
-                            </li>
-                        @endforeach
-                    </ol>
-                </section>
-
-                <section class="empty-state" aria-labelledby="empty-heading">
-                    <h2 id="empty-heading">No telemetry has been captured yet</h2>
-                    <p>When capture and storage are connected, this space will show the first safe, redacted staging events that match the active filters.</p>
+                                    <a
+                                        class="timeline-button {{ ($selectedEventId ?? null) === $event['id'] ? 'active' : '' }}"
+                                        href="{{ request()->fullUrlWithQuery(['event' => $event['id']]) }}"
+                                    >
+                                        Details
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ol>
+                    @endif
                 </section>
             </div>
 

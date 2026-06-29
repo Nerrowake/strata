@@ -40,6 +40,11 @@ compatibility expectations before release.
 The `payload` field must contain redacted normalized metadata, never raw
 framework payloads for later cleanup.
 
+The prototype collector accepts associative arrays that expose these fields
+directly while the package is still validating the capture pipeline. Capture
+sources must include `type`, `occurred_at`, safe event-specific fields, and a
+`redactions` list that names omitted sensitive fields.
+
 ## Event Types
 
 Initial event types:

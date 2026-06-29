@@ -42,13 +42,17 @@ host application should own middleware and authorization decisions.
 
 ```php
 'storage' => [
-    'driver' => 'database',
+    'driver' => 'memory',
     'connection' => env('STRATA_DB_CONNECTION', null),
+    'max_events' => env('STRATA_MAX_EVENTS', 500),
 ],
 ```
 
-The first storage driver should be `database`. A `null` connection means the
-host application's default database connection.
+The prototype storage driver is `memory`. It is process-local and intended only
+for early package and dashboard validation. `max_events` bounds the number of
+stored prototype events so dashboard reads and memory use stay predictable.
+
+The `connection` key is reserved for the first database-backed storage driver.
 
 ### Retention
 
