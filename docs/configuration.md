@@ -37,6 +37,8 @@ decision.
 
 Dashboard routes should be disabled by default and private when enabled. The
 host application should own middleware and authorization decisions.
+When `gate` is set, Strata denies dashboard access unless the named Laravel gate
+allows the request.
 
 ### Storage
 
@@ -65,6 +67,19 @@ The `connection` key is reserved for the first database-backed storage driver.
 
 Telemetry should be temporary staging review data. The first default retention
 window is 24 hours.
+
+### Review Sessions
+
+```php
+'session' => [
+    'id' => env('STRATA_SESSION_ID', null),
+    'label' => env('STRATA_SESSION_LABEL', null),
+],
+```
+
+Session identifiers are safe labels for staging review windows. When configured,
+Strata attaches them to captured events so the dashboard can filter a QA or
+client review pass.
 
 ### Capture Categories
 
@@ -137,6 +152,19 @@ staging environment.
 Redaction should replace sensitive values with a stable marker instead of
 silently dropping useful field names. Custom keys and patterns must be
 test-covered when implemented.
+
+### Exceptions
+
+```php
+'exceptions' => [
+    'message' => 'redacted',
+    'stack_trace' => false,
+    'stack_trace_limit' => 3,
+],
+```
+
+Exception messages and stack traces stay redacted or disabled by default.
+Enabling stack traces should be a deliberate staging-only decision.
 
 ### Environment Context
 

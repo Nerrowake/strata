@@ -72,6 +72,7 @@ It should help:
 - [Product Brief](docs/product-brief.md)
 - [Personas and Staging Workflows](docs/personas-workflows.md)
 - [Product Requirements](docs/product-requirements.md)
+- [Alpha Usage and Limitations](docs/alpha-usage.md)
 - [Telemetry Scope](docs/telemetry-scope.md)
 - [Telemetry Event Schema](docs/event-schema.md)
 - [Privacy and Security](docs/privacy-security.md)
@@ -101,9 +102,9 @@ composer test
 
 The CI workflow runs those same formatting and test commands on pull requests.
 
-## Prototype Installation
+## Alpha Installation
 
-Prototype installation path once the package is published:
+Alpha installation path once the package is published:
 
 ```bash
 composer require nerrowake/strata
@@ -131,12 +132,13 @@ composer require nerrowake/strata:@dev
 php artisan vendor:publish --tag=strata-config
 ```
 
-Enable the prototype explicitly in `config/strata.php` or environment values:
+Enable the alpha explicitly in `config/strata.php` or environment values:
 
 ```env
 STRATA_ENABLED=true
 STRATA_DASHBOARD_ENABLED=true
 STRATA_MAX_EVENTS=500
+STRATA_RETENTION_HOURS=24
 ```
 
 The dashboard route defaults to `/strata` and uses the configured middleware.
@@ -156,15 +158,20 @@ The package currently provides:
   duration
 - prototype query capture with SQL shape redaction, slow-query flags, and
   possible repeated-query evidence
+- alpha exception, job, scheduled task, review session, retention, and dashboard
+  filtering behavior
 
-Known prototype limitations:
+Known alpha limitations:
 
 - Storage is in-memory and process-local; events reset when the PHP process
   restarts.
 - Dashboard filtering is server-rendered and intended for early validation.
-- Query and request capture are implemented first; jobs, scheduled tasks, and
-  exception capture are still future work.
-- Production usage is out of scope until a separate production policy exists.
+- Production usage, durable storage, public issue links, request body capture,
+  raw query bindings, queue payload inspection, and scheduled task output
+  capture are unsupported.
+
+See [Alpha Usage and Limitations](docs/alpha-usage.md) before enabling Strata in
+staging.
 
 ## License
 

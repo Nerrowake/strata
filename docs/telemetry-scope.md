@@ -127,6 +127,39 @@ Redaction safeguards:
 - possible N+1 detection can be disabled with `capture.n_plus_one`
 - slow and repeated-query thresholds are configurable
 
+## Exception Telemetry Plan
+
+Alpha exception telemetry records the exception class, safe context, failure
+state, and a redacted message marker. Full exception messages are redacted by
+default because they often contain request values, credentials, or internal
+paths. Limited stack frames can be enabled explicitly with
+`exceptions.stack_trace`.
+
+## Job Telemetry Plan
+
+Alpha job telemetry records queued, started, completed, and failed lifecycle
+events. It stores the job class, queue, connection, safe status, and failure
+class when available. Serialized job payloads and model attributes are excluded
+by default.
+
+## Scheduled Task Telemetry Plan
+
+Alpha scheduler telemetry records scheduled task start, completion, duration,
+and failure events. Command names are displayed as safe operational metadata.
+Command output, environment variables, and failure messages are redacted or
+excluded by default.
+
+## Review Sessions
+
+Alpha review sessions are grouped with configured safe identifiers:
+
+- `session.id`
+- `session.label`
+
+When configured, the telemetry collector attaches the session identifier to
+captured events so the dashboard can filter a bounded QA or client review
+window. Session start and end events can also be recorded explicitly.
+
 ## Default Capture
 
 The first implementation should default to the smallest useful staging signal:

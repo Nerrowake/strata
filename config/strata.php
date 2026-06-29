@@ -7,6 +7,7 @@ return [
         'enabled' => env('STRATA_DASHBOARD_ENABLED', false),
         'path' => env('STRATA_DASHBOARD_PATH', 'strata'),
         'middleware' => ['web', 'auth'],
+        'gate' => null,
     ],
 
     'storage' => [
@@ -18,6 +19,11 @@ return [
     'retention' => [
         'enabled' => true,
         'hours' => env('STRATA_RETENTION_HOURS', 24),
+    ],
+
+    'session' => [
+        'id' => env('STRATA_SESSION_ID', null),
+        'label' => env('STRATA_SESSION_LABEL', null),
     ],
 
     'capture' => [
@@ -62,6 +68,12 @@ return [
             'credential',
         ],
         'patterns' => [],
+    ],
+
+    'exceptions' => [
+        'message' => 'redacted',
+        'stack_trace' => false,
+        'stack_trace_limit' => 3,
     ],
 
     'environment' => [

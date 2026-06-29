@@ -6,12 +6,12 @@ use Closure;
 use Illuminate\Http\Request;
 use Nerrowake\Strata\Contracts\TelemetryCollector;
 use Symfony\Component\HttpFoundation\Response;
-use Throwable;
 
 class RequestTelemetryMiddleware
 {
     public function __construct(
         private readonly TelemetryCollector $events,
+        private readonly ExceptionTelemetryRecorder $exceptions,
     ) {}
 
     public function handle(Request $request, Closure $next): Response
@@ -25,7 +25,8 @@ class RequestTelemetryMiddleware
 
         try {
             $response = $next($request);
-        } catch (Throwable $exception) {
+        } catch (\Throwable $exception) {
+            $this->exceptions->record($exception, 'request');
             $this->recordCompleted($request, 500, $startedAt, true);
 
             throw $exception;

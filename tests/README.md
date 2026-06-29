@@ -32,6 +32,15 @@ Current coverage:
 - SQL shape storage without raw bindings
 - slow query indicators
 - first repeated-query threshold signal for possible N+1 patterns
+- exception telemetry with redacted messages
+- job lifecycle telemetry without payload capture
+- scheduled task telemetry without command output capture
+- review session start/end grouping
+- dashboard access gates
+- event type, session, and safe metadata search filters
+- retention pruning boundaries
+- redaction coverage for headers, cookies, tokens, request bodies, query
+  bindings, and dashboard rendering
 
-Future tests should add deeper redaction, storage, queue, scheduler,
-compatibility, and release smoke coverage described in the testing strategy.
+Future tests should add durable storage, broader compatibility, and release
+smoke coverage described in the testing strategy.

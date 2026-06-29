@@ -20,6 +20,10 @@ All notable changes to Strata will be documented in this file.
 - Prototype query telemetry capture with SQL shape redaction, slow query
   indicators, and cautious repeated-query N+1 signals.
 - Prototype CI workflow for formatting and package tests.
+- Alpha exception, job, scheduled task, review session, event retention,
+  dashboard access, event type filtering, session filtering, and safe search
+  behavior.
+- Alpha usage and limitation documentation.
 - Foundation documentation for personas, product requirements, information
   architecture, local development, package distribution, dashboard
   authentication, event schema, configuration defaults, and decision logs.

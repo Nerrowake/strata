@@ -155,7 +155,7 @@
 
         .filters {
             display: grid;
-            grid-template-columns: 1.2fr repeat(2, minmax(120px, 0.6fr)) auto;
+            grid-template-columns: 1.2fr repeat(3, minmax(120px, 0.6fr)) auto;
             align-items: end;
             gap: 12px;
             padding: 16px;
@@ -188,6 +188,32 @@
             justify-content: center;
             text-decoration: none;
             font-weight: 800;
+        }
+
+        .type-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0 16px 16px;
+        }
+
+        .type-filters label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 34px;
+            padding: 6px 10px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--panel);
+            color: var(--ink);
+            font-size: 0.8125rem;
+        }
+
+        .type-filters input {
+            width: auto;
+            min-height: 0;
+            padding: 0;
         }
 
         .timeline {
@@ -380,7 +406,7 @@
                     </div>
                 </div>
 
-                <div class="status-note">Prototype shell | request and query capture active when enabled</div>
+                <div class="status-note">Alpha shell | safe staging telemetry</div>
             </div>
         </header>
 
@@ -405,10 +431,10 @@
                     </article>
                 </section>
 
-                <form class="filters" aria-label="Timeline filters" method="get">
+                <form id="timeline-filter-form" class="filters" aria-label="Timeline filters" method="get">
                     <label>
                         Search
-                        <input type="search" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Path, route, status, request id">
+                        <input type="search" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Path, route, exception, job, task">
                     </label>
                     <label>
                         Method
@@ -423,17 +449,40 @@
                         Status
                         <select name="status">
                             <option value="">Any status</option>
-                            @foreach (['started' => 'Started', '200' => '200', '404' => '404', '500' => '500', 'ok' => 'OK', 'slow' => 'Slow', 'possible_n_plus_one' => 'Possible N+1'] as $value => $label)
+                            @foreach (['started' => 'Started', 'completed' => 'Completed', 'failed' => 'Failed', 'captured' => 'Captured', '200' => '200', '404' => '404', '500' => '500', 'ok' => 'OK', 'slow' => 'Slow', 'possible_n_plus_one' => 'Possible N+1'] as $value => $label)
                                 <option value="{{ $value }}" @selected(($filters['status'] ?? '') === $value)>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                    <label>
+                        Session
+                        <select name="session">
+                            <option value="">Any session</option>
+                            @foreach ($sessions ?? [] as $session)
+                                <option value="{{ $session }}" @selected(($filters['session'] ?? '') === $session)>{{ $session }}</option>
                             @endforeach
                         </select>
                     </label>
                     <a class="clear-link" href="{{ route('strata.dashboard') }}">Clear filters</a>
                 </form>
+                <fieldset class="type-filters" aria-label="Event type filters">
+                    @foreach (['request' => 'Requests', 'query' => 'Queries', 'exception' => 'Exceptions', 'job' => 'Jobs', 'schedule' => 'Scheduled tasks', 'session' => 'Sessions'] as $value => $label)
+                        <label>
+                            <input
+                                form="timeline-filter-form"
+                                type="checkbox"
+                                name="types[]"
+                                value="{{ $value }}"
+                                @checked(in_array($value, $filters['types'] ?? [], true))
+                            >
+                            {{ $label }}
+                        </label>
+                    @endforeach
+                </fieldset>
 
                 <p class="filter-state">
                     Showing {{ $matchingEvents ?? 0 }} of {{ $storedEvents ?? 0 }} stored events
-                    @if (($filters['q'] ?? '') !== '' || ($filters['method'] ?? '') !== '' || ($filters['status'] ?? '') !== '')
+                    @if (($filters['q'] ?? '') !== '' || ($filters['method'] ?? '') !== '' || ($filters['status'] ?? '') !== '' || ($filters['session'] ?? '') !== '' || ($filters['types'] ?? []) !== [])
                         with active filters
                     @else
                         with no active filters
@@ -453,8 +502,13 @@
                         </section>
                     @elseif ($events === [])
                         <section class="empty-state" aria-labelledby="empty-heading">
-                            <h2 id="empty-heading">No telemetry has been captured yet</h2>
-                            <p>When capture and storage are connected, this space will show the first safe, redacted staging events that match the active filters.</p>
+                            @if (($storedEvents ?? 0) > 0)
+                                <h2 id="empty-heading">No matching telemetry events</h2>
+                                <p>Clear or adjust the active filters to inspect the safe, redacted events currently stored for this staging environment.</p>
+                            @else
+                                <h2 id="empty-heading">No telemetry has been captured yet</h2>
+                                <p>When capture and storage are connected, this space will show the first safe, redacted staging events that match the active filters.</p>
+                            @endif
                         </section>
                     @else
                         <ol class="timeline-list">

@@ -63,10 +63,11 @@ class RequestTelemetryTest extends TestCase
 
         $events = app(TelemetryEventStore::class)->recent();
 
-        $this->assertCount(2, $events);
+        $this->assertCount(3, $events);
         $this->assertSame('request.completed', $events[0]['event']);
         $this->assertSame(500, $events[0]['status']);
         $this->assertTrue($events[0]['failed']);
-        $this->assertSame('request.started', $events[1]['event']);
+        $this->assertSame('exception.captured', $events[1]['event']);
+        $this->assertSame('request.started', $events[2]['event']);
     }
 }

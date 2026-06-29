@@ -47,6 +47,32 @@ class TelemetryEventStore
         return count($this->events);
     }
 
+    /**
+     * @return array<int, string>
+     */
+    public function sessions(): array
+    {
+        return array_values(array_unique(array_filter(array_map(
+            static fn (array $event): ?string => isset($event['session_id']) ? (string) $event['session_id'] : null,
+            $this->events
+        ))));
+    }
+
+    public function pruneOlderThan(\DateTimeInterface $threshold): int
+    {
+        $before = count($this->events);
+        $thresholdTimestamp = $threshold->getTimestamp();
+
+        $this->events = array_values(array_filter(
+            $this->events,
+            static fn (array $event): bool => ! isset($event['occurred_at'])
+                || ! $event['occurred_at'] instanceof \DateTimeInterface
+                || $event['occurred_at']->getTimestamp() >= $thresholdTimestamp
+        ));
+
+        return $before - count($this->events);
+    }
+
     public function reset(): void
     {
         $this->events = [];
