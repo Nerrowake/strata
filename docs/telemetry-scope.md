@@ -71,6 +71,32 @@ how it can be disabled or narrowed.
 | Scheduled tasks | command or task name, lifecycle state, duration, exit status, timestamp | command arguments marked sensitive, environment variables, command output | enable or disable scheduler telemetry; ignore task names |
 | Environment context | configured environment name, app version or deployment identifier when provided | server secrets, full environment variables, infrastructure credentials | choose which identifiers are provided; disable deployment context |
 
+## Request Telemetry Plan
+
+The first request telemetry implementation records safe lifecycle metadata for
+web requests when Strata and request capture are enabled.
+
+Initial request fields:
+
+- lifecycle event name: `request.started` or `request.completed`
+- HTTP method
+- path without query string
+- route name when Laravel resolved one
+- response status for completed requests
+- duration in milliseconds for completed requests
+- failure marker for exceptions or server-error responses
+- redaction markers for excluded bodies, headers, cookies, and uploaded files
+
+Redaction safeguards:
+
+- request bodies are excluded from stored events
+- headers and cookies are excluded from stored events
+- query strings are excluded unless a future explicit opt-in adds them
+- request capture can be disabled with `capture.requests`
+- paths and route names can be excluded with `ignore.paths` and
+  `ignore.routes`
+- telemetry failures are swallowed so host requests continue normally
+
 ## Query Telemetry Plan
 
 The first query telemetry implementation records Laravel database query events

@@ -3,14 +3,14 @@
 namespace Nerrowake\Strata\Capture;
 
 use Illuminate\Database\Events\QueryExecuted;
+use Nerrowake\Strata\Contracts\TelemetryCollector;
 use Nerrowake\Strata\Redaction\SqlShapeSanitizer;
-use Nerrowake\Strata\Storage\QueryEventStore;
 use Throwable;
 
 class QueryTelemetryRecorder
 {
     public function __construct(
-        private readonly QueryEventStore $events,
+        private readonly TelemetryCollector $events,
         private readonly SqlShapeSanitizer $sanitizer,
     ) {}
 
