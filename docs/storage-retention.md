@@ -21,10 +21,10 @@ Prototype configuration shape:
 ],
 ```
 
-Prototype retention behavior is bounded by count. When more than `max_events`
-events are recorded, the oldest events are discarded. This keeps memory use and
-dashboard reads predictable while the database-backed driver is still future
-work.
+Prototype retention behavior is bounded by count and by explicit pruning. When
+more than `max_events` events are recorded, the oldest events are discarded.
+This keeps memory use and dashboard reads predictable while the database-backed
+driver is still future work.
 
 ## Future Database Storage Decision
 
@@ -126,8 +126,19 @@ Suggested configuration shape:
 
 ## Cleanup Behavior
 
-Strata should provide a cleanup command in the first database-backed
-implementation.
+The alpha provides a prototype cleanup command:
+
+```text
+php artisan strata:prune
+php artisan strata:prune --dry-run
+```
+
+The command removes in-memory events older than `retention.hours` when
+`retention.enabled` is true. It does not delete events newer than the configured
+boundary, which avoids clearing active review-session data unexpectedly.
+
+The future database-backed implementation should keep the same visible command
+shape.
 
 Expected command behavior:
 
